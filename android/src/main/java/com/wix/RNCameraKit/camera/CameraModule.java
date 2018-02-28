@@ -89,7 +89,7 @@ public class CameraModule extends ReactContextBaseJavaModule {
         if (camera != null){
             promise.resolve(camera.getParameters().getSupportedFlashModes() != null);
         } else {
-            promise.resolve(false);
+            promise.resolve(null);
         }
     }
 
