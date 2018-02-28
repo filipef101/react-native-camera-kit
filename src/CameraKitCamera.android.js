@@ -14,7 +14,6 @@ export default class CameraKitCamera extends React.Component {
   render() {
     const transformedProps = _.cloneDeep(this.props);
     _.update(transformedProps, 'cameraOptions.ratioOverlayColor', (c) => processColor(c));
-    _.update(transformedProps, 'backgroundColor', (c) => processColor(c));
     _.update(transformedProps, 'frameColor', (c) => processColor(c));
     _.update(transformedProps, 'laserColor', (c) => processColor(c));
 
@@ -40,6 +39,18 @@ export default class CameraKitCamera extends React.Component {
   async changeCamera() {
     const success = await NativeCameraModule.changeCamera();
     return success;
+  }
+
+  async hasFlashForCurrentCamera() {
+    const success = await NativeCameraModule.hasFlashForCurrentCamera();
+    return success;
+    hasFrontCamera
+  }
+
+  async hasFrontCamera() {
+    const success = await NativeCameraModule.hasFrontCamera();
+    return success;
+    
   }
 
   async setFlashMode(flashMode = 'auto') {
