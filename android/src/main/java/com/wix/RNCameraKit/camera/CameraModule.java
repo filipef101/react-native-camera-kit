@@ -1,7 +1,7 @@
 package com.wix.RNCameraKit.camera;
 
 import android.hardware.Camera;
-
+import java.lang.RuntimeException;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -85,10 +85,15 @@ public class CameraModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void hasFlashForCurrentCamera(Promise promise) {
-        Camera camera = CameraViewManager.getCamera();
-        if (camera != null){
-            promise.resolve(camera.getParameters().getSupportedFlashModes() != null);
-        } else {
+        try {
+            Camera camera = CameraViewManager.getCamera();
+            if (camera != null){
+                promise.resolve(camera.getParameters().getSupportedFlashModes() != null);
+            } else {
+                promise.resolve(null);
+            }
+            
+        } catch (RuntimeException e) {
             promise.resolve(null);
         }
     }
